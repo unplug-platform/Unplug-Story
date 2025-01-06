@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:storyview/screens/story.dart';
+import 'package:storyview/screens/story_widget.dart';
+import 'package:storyview/storyview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,6 +73,43 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<Story> stories = [
+      Story(
+        title: "John's Adventure",
+        coverImageUrl: 'https://picsum.photos/800/1600?3',
+        urls: [
+          UrlItem(url: 'https://picsum.photos/800/1600?1', isVideo: false),
+          UrlItem(url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', isVideo: true),
+          UrlItem(url: 'https://picsum.photos/800/1600?2', isVideo: false),
+          UrlItem(url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', isVideo: true),
+        ],
+      ),
+      Story(
+        title: "Emily's Trip",
+        coverImageUrl: 'https://picsum.photos/800/1600?3',
+        urls: [
+          UrlItem(url: 'https://picsum.photos/800/1600?2', isVideo: false),
+          UrlItem(url: 'https://picsum.photos/800/1600?3', isVideo: false),
+          UrlItem(url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', isVideo: true),
+        ],
+      ),
+      Story(
+        title: "Mike's Adventure",
+        coverImageUrl: 'https://picsum.photos/800/1600?4',
+        urls: [
+          UrlItem(url: 'https://picsum.photos/800/1600?4', isVideo: false),
+        ],
+      ),
+      Story(
+        title: "Anna's Day Out",
+        coverImageUrl: 'https://picsum.photos/800/1600?5',
+        urls: [
+          UrlItem(url: 'https://picsum.photos/800/1600?5', isVideo: false),
+        ],
+      ),
+    ];
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -89,37 +129,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child: StoryListView(
+          stories: stories,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
