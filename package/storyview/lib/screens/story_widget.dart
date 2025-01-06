@@ -4,10 +4,16 @@ import 'package:storyview/screens/story_detail_screen.dart';
 
 class StoryListView<T> extends StatelessWidget {
   final List<Story> stories;
+  final FontWeight? titleFontWeight;
+  final double? titleFontSize;
+  final Color? titleColor;
 
   const StoryListView({
     Key? key,
     required this.stories,
+    this.titleFontWeight,
+    this.titleFontSize,
+    this.titleColor,
   }) : super(key: key);
 
   @override
@@ -43,10 +49,10 @@ class StoryListView<T> extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     story.title,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                    style: TextStyle(
+                      color: titleColor ?? Colors.black,
+                      fontSize: titleFontSize ?? 12,
+                      fontWeight: titleFontWeight ?? FontWeight.w500,
                     ),
                   ),
                 ],
