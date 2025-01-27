@@ -17,8 +17,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  cachecontrol:
+    dependency: transitive
+    description:
+      name: cachecontrol
+      sha256: "47b68cd2055ebe3b375204468b2087d8381f65dd0599c63901ec04dfae235bb8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0+1"
   cached_network_image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cached_network_image
       sha256: "7c1183e361e5c8b0a0f21a28401eecdbde252441106a9816400dd4c2b2424916"
@@ -81,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  cupertino_icons:
+    dependency: "direct main"
+    description:
+      name: cupertino_icons
+      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.8"
   fake_async:
     dependency: transitive
     description:
@@ -429,6 +445,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  unplug_story:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
   uuid:
     dependency: transitive
     description:
@@ -446,7 +469,7 @@ packages:
     source: hosted
     version: "2.1.4"
   video_player:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: video_player
       sha256: "4a8c3492d734f7c39c2588a3206707a05ee80cef52e8c7f3b2078d430c84bc17"
