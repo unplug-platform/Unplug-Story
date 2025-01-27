@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:storyview/screens/cube_page_view_builder.dart';
 import 'package:storyview/screens/story.dart';
@@ -18,11 +19,11 @@ final class StoryDetailScreen extends StatefulWidget {
   _StoryDetailScreenState createState() => _StoryDetailScreenState();
 }
 
-class _StoryDetailScreenState extends State<StoryDetailScreen>
+final class _StoryDetailScreenState extends State<StoryDetailScreen>
     with SingleTickerProviderStateMixin {
-  late int currentStoryIndex;
-  late int currentMediaIndex;
-  late PageController pageController;
+  int currentStoryIndex = 0;
+  int currentMediaIndex = 0;
+  late final PageController pageController;
   Timer? timer;
   double progressValue = 0.0;
   VideoPlayerController? videoController;
@@ -36,7 +37,7 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
     _setupCurrentMedia();
   }
 
-  void _setupCurrentMedia() {
+  Future<void> _setupCurrentMedia() async {
     final story = widget.stories[currentStoryIndex];
 
     if (currentMediaIndex < 0 || currentMediaIndex >= story.urls.length) {
@@ -55,22 +56,20 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
     if (media.isVideo) {
       if (media.url.isEmpty) return;
 
-      videoController = VideoPlayerController.network(media.url)
-        ..initialize().then((_) {
-          setState(() {});
-          videoController!.play();
-          timer = Timer.periodic(const Duration(milliseconds: 100), (t) {
-            if (!mounted) return;
-
-            setState(() {
-              progressValue = videoController!.value.position.inMilliseconds /
-                  videoController!.value.duration.inMilliseconds;
-              if (progressValue >= 1.0) {
-                nextMediaOrStory();
-              }
-            });
-          });
+      videoController = VideoPlayerController.networkUrl(Uri.tryParse(media.url) ?? Uri());
+      await videoController?.initialize();
+      videoController?.addListener(() {});
+      videoController!.play();
+      timer = Timer.periodic(const Duration(milliseconds: 100), (t) {
+        if (!mounted) return;
+        setState(() {
+          progressValue = videoController!.value.position.inMilliseconds /
+              videoController!.value.duration.inMilliseconds;
+          if (progressValue >= 1.0) {
+            nextMediaOrStory();
+          }
         });
+      });
     } else {
       progressValue = 0.0;
       startImageProgressBar();
@@ -182,20 +181,17 @@ class _StoryDetailScreenState extends State<StoryDetailScreen>
                   return CubeWidget(
                     index: index,
                     pageNotifier: notifier,
-                    child: media.isVideo && videoController != null
-                        ? Center(
-                      child: videoController!.value.isInitialized
-                          ? AspectRatio(
+                    child: media.isVideo && videoController != null ? Center(
+                      child: videoController!.value.isInitialized ? AspectRatio(
                         aspectRatio: videoController!.value.aspectRatio,
                         child: VideoPlayer(videoController!),
-                      )
-                          : const CircularProgressIndicator(),
-                    )
-                        : Image.network(
-                      media.url,
+                      ) : const CircularProgressIndicator(),
+                    ) : CachedNetworkImage(
+                      imageUrl: media.url,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
+                      placeholder: (_,  __) => CircularProgressIndicator(),
                     ),
                   );
                 },

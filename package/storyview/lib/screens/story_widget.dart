@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:storyview/screens/story.dart';
 import 'package:storyview/screens/story_detail_screen.dart';
 
-class StoryListView<T> extends StatelessWidget {
+final class StoryListView extends StatelessWidget {
   final List<Story> stories;
-  final FontWeight? titleFontWeight;
-  final double? titleFontSize;
-  final Color? titleColor;
+  final Widget Function(Story story)? titleBuilder;
 
   const StoryListView({
-    Key? key,
+    super.key,
     required this.stories,
-    this.titleFontWeight,
-    this.titleFontSize,
-    this.titleColor,
-  }) : super(key: key);
+    this.titleBuilder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +43,12 @@ class StoryListView<T> extends StatelessWidget {
                     backgroundColor: Colors.grey.shade800,
                   ),
                   const SizedBox(height: 8),
-                  Text(
+                  titleBuilder != null ? titleBuilder!(story) : Text(
                     story.title,
                     style: TextStyle(
-                      color: titleColor ?? Colors.black,
-                      fontSize: titleFontSize ?? 12,
-                      fontWeight: titleFontWeight ?? FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],

@@ -131,6 +131,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // in the middle of the parent.
         child: StoryListView(
           stories: stories,
+          titleBuilder: (Story story) => Text(
+            story.title,
+          ),
         ),
       ),
     );
