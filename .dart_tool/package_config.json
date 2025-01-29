@@ -98,6 +98,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_carousel_slider",
+      "rootUri": "file:///Users/burak/.pub-cache/hosted/pub.dev/flutter_carousel_slider-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/burak/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
@@ -398,7 +404,7 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2025-01-27T12:49:31.567220Z",
+  "generated": "2025-01-29T11:08:43.561033Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///Users/burak/fvm/versions/stable",

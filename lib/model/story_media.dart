@@ -1,5 +1,5 @@
-final class StoryUrl {
-  const StoryUrl({
+final class StoryMedia {
+  const StoryMedia({
     required this.url,
     required this.isVideo,
   });

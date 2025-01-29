@@ -1,2 +1,2 @@
 export 'story.dart';
-export 'story_url.dart';
+export 'story_media.dart';

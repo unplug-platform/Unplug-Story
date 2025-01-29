@@ -1,13 +1,13 @@
-import 'package:unplug_story/model/story_url.dart';
+import 'package:unplug_story/model/story_media.dart';
 
 final class Story {
   const Story({
-    required this.urls,
+    required this.mediaList,
     required this.title,
     required this.coverImageUrl,
   });
 
-  final List<StoryUrl> urls;
+  final List<StoryMedia> mediaList;
   final String title;
   final String coverImageUrl;
 
@@ -15,14 +15,14 @@ final class Story {
     Story(
       title: "John's Adventure",
       coverImageUrl: 'https://picsum.photos/800/1600?3',
-      urls: [
-        StoryUrl(url: 'https://picsum.photos/800/1600?1', isVideo: false),
-        StoryUrl(
+      mediaList: [
+        StoryMedia(url: 'https://picsum.photos/800/1600?1', isVideo: false),
+        StoryMedia(
           url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
           isVideo: true,
         ),
-        StoryUrl(url: 'https://picsum.photos/800/1600?2', isVideo: false),
-        StoryUrl(
+        StoryMedia(url: 'https://picsum.photos/800/1600?2', isVideo: false),
+        StoryMedia(
           url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
           isVideo: true,
         ),
@@ -31,10 +31,10 @@ final class Story {
     Story(
       title: "Emily's Trip",
       coverImageUrl: 'https://picsum.photos/800/1600?3',
-      urls: [
-        StoryUrl(url: 'https://picsum.photos/800/1600?2', isVideo: false),
-        StoryUrl(url: 'https://picsum.photos/800/1600?3', isVideo: false),
-        StoryUrl(
+      mediaList: [
+        StoryMedia(url: 'https://picsum.photos/800/1600?2', isVideo: false),
+        StoryMedia(url: 'https://picsum.photos/800/1600?3', isVideo: false),
+        StoryMedia(
           url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
           isVideo: true,
         ),
@@ -43,15 +43,15 @@ final class Story {
     Story(
       title: "Mike's Adventure",
       coverImageUrl: 'https://picsum.photos/800/1600?4',
-      urls: [
-        StoryUrl(url: 'https://picsum.photos/800/1600?4', isVideo: false),
+      mediaList: [
+        StoryMedia(url: 'https://picsum.photos/800/1600?4', isVideo: false),
       ],
     ),
     Story(
       title: "Anna's Day Out",
       coverImageUrl: 'https://picsum.photos/800/1600?5',
-      urls: [
-        StoryUrl(url: 'https://picsum.photos/800/1600?5', isVideo: false),
+      mediaList: [
+        StoryMedia(url: 'https://picsum.photos/800/1600?5', isVideo: false),
       ],
     ),
   ];
