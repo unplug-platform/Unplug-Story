@@ -42,6 +42,8 @@ final class StoryListWidget extends StatelessWidget {
     this.bottomButtonTitleBuilder,
     this.onBottomButtonTap,
     this.storyTitleBuilder,
+    this.borderWidth = 2,
+    this.borderColor = Colors.deepPurple,
   });
 
   /// The list of stories to display.
@@ -74,6 +76,12 @@ final class StoryListWidget extends StatelessWidget {
   /// Callback function when bottom button is tapped in story detail view.
   final ValueSetter<StoryMedia>? onBottomButtonTap;
 
+  /// The width of the border around the story cover image.
+  final double borderWidth;
+
+  /// The color of the border around the story cover image.
+  final Color borderColor;
+
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -102,7 +110,13 @@ final class StoryListWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(height: gapSize),
-              coverBuilder != null ? coverBuilder!(story) : _DefaultCoverWidget(story: story),
+              coverBuilder != null
+                  ? coverBuilder!(story)
+                  : _DefaultCoverWidget(
+                      story: story,
+                      borderWidth: borderWidth,
+                      borderColor: borderColor,
+                    ),
               SizedBox(height: gapSize),
               titleBuilder != null ? titleBuilder!(story) : _DefaultTitleWidget(story: story),
               SizedBox(height: gapSize),
@@ -120,18 +134,30 @@ final class StoryListWidget extends StatelessWidget {
 final class _DefaultCoverWidget extends StatelessWidget {
   const _DefaultCoverWidget({
     required this.story,
+    required this.borderWidth,
+    required this.borderColor,
   });
 
   final Story story;
+  final double borderWidth;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: story.coverImageUrl + story.title,
-      child: CircleAvatar(
-        radius: 35,
-        backgroundImage: CachedNetworkImageProvider(story.coverImageUrl),
-        backgroundColor: Colors.grey.shade800,
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: borderColor,
+            width: borderWidth,
+          ),
+        ),
+        child: CircleAvatar(
+          radius: 35,
+          backgroundImage: CachedNetworkImageProvider(story.coverImageUrl),
+        ),
       ),
     );
   }
