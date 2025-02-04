@@ -39,6 +39,7 @@ final class StoryDetailWidget extends StatefulWidget {
     required this.initialIndex,
     this.onBottomButtonTap,
     this.bottomButtonTitleBuilder,
+    this.storyTitleBuilder,
   });
 
   /// The list of stories to display.
@@ -52,6 +53,9 @@ final class StoryDetailWidget extends StatefulWidget {
 
   /// Custom builder for the bottom button title widget.
   final StoryMediaWidgetBuilder? bottomButtonTitleBuilder;
+
+  /// Custom builder for the story title widget.
+  final StoryWidgetBuilder? storyTitleBuilder;
 
   @override
   State<StoryDetailWidget> createState() => _StoryDetailWidgetState();
@@ -166,7 +170,10 @@ final class _StoryDetailWidgetState extends State<StoryDetailWidget>
                     Positioned(
                       top: 24,
                       left: 8,
-                      child: _StoryInfo(story: story),
+                      child: _StoryInfo(
+                        story: story,
+                        storyTitleBuilder: widget.storyTitleBuilder,
+                      ),
                     ),
                     Positioned(
                       bottom: 0,
@@ -198,10 +205,14 @@ final class _StoryInfo extends StatelessWidget {
   /// The [story] parameter is required to display the story's avatar and title.
   const _StoryInfo({
     required this.story,
+    this.storyTitleBuilder,
   });
 
   /// The story whose information will be displayed.
   final Story story;
+
+  /// The builder for the story info widget.
+  final StoryWidgetBuilder? storyTitleBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -218,12 +229,14 @@ final class _StoryInfo extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        Text(
-          story.title,
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: Colors.white,
+        storyTitleBuilder != null
+            ? storyTitleBuilder!(story)
+            : Text(
+                story.title,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: Colors.white,
+                    ),
               ),
-        ),
       ],
     );
   }
