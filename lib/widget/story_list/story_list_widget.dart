@@ -41,6 +41,7 @@ final class StoryListWidget extends StatelessWidget {
     this.gapSize = 8,
     this.bottomButtonTitleBuilder,
     this.onBottomButtonTap,
+    this.storyTitleBuilder,
   });
 
   /// The list of stories to display.
@@ -50,6 +51,11 @@ final class StoryListWidget extends StatelessWidget {
   ///
   /// If null, a default title widget will be used.
   final StoryWidgetBuilder? titleBuilder;
+
+  /// Custom builder for story info widgets.
+  ///
+  /// If null, a default info widget will be used.
+  final StoryWidgetBuilder? storyTitleBuilder;
 
   /// Custom builder for story cover image widgets.
   ///
@@ -87,6 +93,7 @@ final class StoryListWidget extends StatelessWidget {
                   initialIndex: index,
                   onBottomButtonTap: onBottomButtonTap,
                   bottomButtonTitleBuilder: bottomButtonTitleBuilder,
+                  storyTitleBuilder: storyTitleBuilder,
                 ),
               ),
             );
